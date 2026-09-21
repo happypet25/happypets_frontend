@@ -17,10 +17,10 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const form = e.currentTarget;
     setIsSubmitting(true);
-    setSubmitStatus('idle');
 
-    const formData = new FormData(e.currentTarget);
+    const formData = new FormData(form);
     const payload = Object.fromEntries(formData.entries());
 
     try {
@@ -51,7 +51,7 @@ export default function Contact() {
             secondary: '#FFFAEE',
           },
         });
-        e.currentTarget.reset(); // Clear the form
+        form.reset(); // Clear the form completely
       } else {
         toast.error(data.message || "Oops! Something went wrong.");
       }
