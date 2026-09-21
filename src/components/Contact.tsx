@@ -24,7 +24,10 @@ export default function Contact() {
     const payload = Object.fromEntries(formData.entries());
 
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
+      let apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
+      // Defensively remove trailing slash to prevent double slash (//) redirect errors on Vercel
+      apiUrl = apiUrl.replace(/\/+$/, "");
+      
       const response = await fetch(`${apiUrl}/api/contact`, {
         method: "POST",
         headers: {
