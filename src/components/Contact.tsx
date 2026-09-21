@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { MapPin, Phone, Mail } from 'lucide-react';
+import toast, { Toaster } from 'react-hot-toast';
 import useScrollReveal from '../hooks/useScrollReveal';
 
 const contactInfo = [
@@ -13,7 +14,6 @@ export default function Contact() {
   useScrollReveal();
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -39,13 +39,25 @@ export default function Contact() {
       const data = await response.json();
 
       if (data.success) {
-        setSubmitStatus('success');
+        toast.success("Thank you! We'll reach you soon.", {
+          style: {
+            border: '1px solid #C62E7B',
+            padding: '16px',
+            color: '#8B1055',
+            fontWeight: '600',
+          },
+          iconTheme: {
+            primary: '#C62E7B',
+            secondary: '#FFFAEE',
+          },
+        });
         e.currentTarget.reset(); // Clear the form
       } else {
-        setSubmitStatus('error');
+        toast.error(data.message || "Oops! Something went wrong.");
       }
     } catch (error) {
-      setSubmitStatus('error');
+      console.error("Fetch error details:", error);
+      toast.error("Network error. Please try again later.");
     } finally {
       setIsSubmitting(false);
     }
@@ -53,6 +65,7 @@ export default function Contact() {
 
   return (
     <section id="contact" className="py-16 lg:py-24 relative overflow-hidden" style={{ background: '#FDF9F6' }}>
+      <Toaster position="bottom-center" reverseOrder={false} />
       {/* Paw watermarks in bg */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
         {[
@@ -213,18 +226,6 @@ export default function Contact() {
               >
                 {isSubmitting ? 'Booking...' : 'Book Free Demo'}
               </button>
-
-              {submitStatus === 'success' && (
-                <div className="text-green-600 text-sm text-center mt-1 font-medium bg-green-50 p-2 rounded-lg border border-green-200">
-                  Thank you! Your demo request has been sent. We'll contact you shortly.
-                </div>
-              )}
-              
-              {submitStatus === 'error' && (
-                <div className="text-red-500 text-sm text-center mt-1 font-medium bg-red-50 p-2 rounded-lg border border-red-200">
-                  Oops! Something went wrong. Please try again later.
-                </div>
-              )}
 
               <p className="text-center text-[11px] sm:text-xs text-gray-400 mt-2 italic">
                 Monthly free demo slots filling fast. No spam, ever.
