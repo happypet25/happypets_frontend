@@ -88,7 +88,7 @@ export default function WhyChooseUs() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div className="reveal-left relative flex flex-col items-center lg:items-start text-center lg:text-left">
             <div className="relative w-full mt-2 lg:mt-6 flex flex-col items-center lg:items-start">
-              <img src="/whychooseus.png" alt="Dog standing on text" className="w-[180px] sm:w-[200px] lg:w-[280px] h-auto object-contain transform translate-y-3 lg:translate-y-5 relative z-10 pointer-events-none" />
+              <img loading="lazy"  src="/whychooseus.png" alt="Dog standing on text" className="w-[180px] sm:w-[200px] lg:w-[280px] h-auto object-contain transform translate-y-3 lg:translate-y-5 relative z-10 pointer-events-none" />
               <h3 className="font-heading font-black leading-none mb-6 relative z-0 w-full" style={{ fontSize: 'clamp(2.2rem, 5vw, 4rem)', color: '#2A1A24' }}>
                 Caring For Your Pets<br />
                 <span style={{ color: '#C62E7B' }}>Like Our Own</span>

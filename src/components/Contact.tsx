@@ -122,7 +122,7 @@ export default function Contact() {
           
           {/* Left - Image */}
           <div className="md:w-1/2 relative h-[250px] sm:h-[350px] md:h-auto">
-            <img 
+            <img loading="lazy"  
               src="/contact.webp" 
               alt="Founder with golden retriever" 
               className="absolute inset-0 w-full h-full object-cover"

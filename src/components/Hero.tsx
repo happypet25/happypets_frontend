@@ -140,7 +140,7 @@ export default function Hero() {
               <div className="flex justify-center items-end overflow-visible">
                 <div className="relative flex justify-center items-end w-full max-w-[400px]">
                   {/* Main image */}
-                  <img
+                  <img loading="lazy" 
                     src="/herohappypets.png"
                     alt="Happy Pet Trainer with Dog"
                     className="w-[120%] max-w-[120%] h-auto object-contain object-bottom relative z-10 drop-shadow-2xl transform -translate-x-[5px]"
@@ -208,7 +208,7 @@ export default function Hero() {
                 }}
               >
                 {/* Main image */}
-                <img
+                <img loading="lazy" 
                   src="/herohappypets.png"
                   alt="Happy Pet Trainer with Dog"
                   className="w-[115%] h-[115%] object-contain object-bottom relative z-10 drop-shadow-2xl"

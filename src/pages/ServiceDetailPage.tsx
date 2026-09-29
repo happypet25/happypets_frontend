@@ -185,8 +185,8 @@ function PricingCard({ pkg, accent, featured = false }: { pkg: PricingPackage; a
             href="tel:+91-88799-52169"
             className="flex-1 flex items-center justify-center gap-1.5 font-heading font-bold text-sm py-3 rounded-xl transition-all hover:opacity-90"
             style={{
-              background: featured ? '#fff' : accent,
-              color: featured ? accent : '#fff',
+              background: '#FCC244',
+              color: '#2A1A24',
             }}
           >
             <Phone size={13} /> Book Now
@@ -391,7 +391,7 @@ function StandardServiceDetailPage({ service }: { service: ServiceItem }) {
 
           {/* Image centered */}
           <div className="flex justify-center w-full max-w-[320px] mx-auto mt-2">
-            <img
+            <img loading="lazy" 
               src={service.image}
               alt={service.category}
               className="w-full object-contain"

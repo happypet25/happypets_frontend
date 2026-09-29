@@ -66,7 +66,7 @@ const PER_PAGE = 12;
 const TRAINER_VIDEOS: VideoData[] = [
   {
     id: 'trainer-1',
-    src: 'https://jdlch2zg7mcuqsny.public.blob.vercel-storage.com/Copy%20of%20today%20post%20%20%281%29%20%281%29.mp4',
+    src: 'https://res.cloudinary.com/xo2vcg7c/video/upload/v1790656215/Copy_of_today_post_1_1.mp4',
     label: 'Expert Trainer',
     sub: 'Mumbai',
     stars: 5,
@@ -75,7 +75,7 @@ const TRAINER_VIDEOS: VideoData[] = [
   },
   {
     id: 'trainer-2',
-    src: 'https://jdlch2zg7mcuqsny.public.blob.vercel-storage.com/today%20post%20%281%29.mp4',
+    src: 'https://res.cloudinary.com/xo2vcg7c/video/upload/v1790656239/today_post_1.mp4',
     label: 'Training Session',
     sub: 'Mumbai',
     stars: 5,
@@ -83,6 +83,7 @@ const TRAINER_VIDEOS: VideoData[] = [
     pinColor: '#C62E7B',
   }
 ];
+
 
 export default function GalleryPage() {
 
@@ -358,7 +359,7 @@ export default function GalleryPage() {
             </button>
           )}
 
-          <img
+          <img loading="lazy" 
             src={paginated[lightbox].src}
             alt={paginated[lightbox].alt}
             className="max-w-full max-h-[85vh] object-contain rounded-2xl shadow-2xl"

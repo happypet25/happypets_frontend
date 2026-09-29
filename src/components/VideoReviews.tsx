@@ -16,7 +16,7 @@ export interface VideoData {
 const VIDEOS: VideoData[] = [
   {
     id: 'review-2',
-    src: 'https://jdlch2zg7mcuqsny.public.blob.vercel-storage.com/review%20video%20-12%20%281%29.mp4',
+    src: 'https://res.cloudinary.com/xo2vcg7c/video/upload/v1790655807/review_video_2_-1.mp4',
     label: 'Verified Review',
     sub: 'Thane',
     stars: 5,
@@ -25,7 +25,7 @@ const VIDEOS: VideoData[] = [
   },
   {
     id: 'review-3',
-    src: 'https://jdlch2zg7mcuqsny.public.blob.vercel-storage.com/review-video-.mp4',
+    src: 'https://res.cloudinary.com/xo2vcg7c/video/upload/v1790656107/review-video-.mp4',
     label: 'Real Customer',
     sub: 'Navi Mumbai',
     stars: 5,
@@ -34,7 +34,7 @@ const VIDEOS: VideoData[] = [
   },
   {
     id: 'review-4',
-    src: 'https://jdlch2zg7mcuqsny.public.blob.vercel-storage.com/1009%20%281%29.mp4',
+    src: 'https://res.cloudinary.com/xo2vcg7c/video/upload/v1790655791/1009_1.mp4',
     label: 'Verified Review',
     sub: 'Mumbai',
     stars: 5,
@@ -43,7 +43,7 @@ const VIDEOS: VideoData[] = [
   },
   {
     id: 'review-5',
-    src: 'https://jdlch2zg7mcuqsny.public.blob.vercel-storage.com/change%20done%20review%20video%202.mp4',
+    src: 'https://res.cloudinary.com/xo2vcg7c/video/upload/v1790655800/change_done_review_video_2.mp4',
     label: 'Real Customer',
     sub: 'Mumbai',
     stars: 5,
@@ -52,7 +52,7 @@ const VIDEOS: VideoData[] = [
   },
   {
     id: 'review-6',
-    src: 'https://jdlch2zg7mcuqsny.public.blob.vercel-storage.com/review%20video%20%282%29-1.mp4',
+    src: 'https://res.cloudinary.com/xo2vcg7c/video/upload/v1790656121/review_video_-12_1.mp4',
     label: 'Verified Review',
     sub: 'Thane',
     stars: 5,
@@ -61,7 +61,7 @@ const VIDEOS: VideoData[] = [
   },
   {
     id: 'review-7',
-    src: 'https://jdlch2zg7mcuqsny.public.blob.vercel-storage.com/review%20video%20%284%292.mp4',
+    src: 'https://res.cloudinary.com/xo2vcg7c/video/upload/v1790655799/review_video_4_2.mp4',
     label: 'Real Customer',
     sub: 'Navi Mumbai',
     stars: 5,
@@ -69,6 +69,7 @@ const VIDEOS: VideoData[] = [
     pinColor: '#FCC244',
   },
 ];
+
 
 
 /* ── Hanging Bone above card ── */
@@ -116,24 +117,44 @@ export interface VideoCardProps {
 
 export function VideoCard({ video, isActive, onActivate }: VideoCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const [loaded, setLoaded] = useState(false);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setInView(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '200px' }
+    );
+    if (containerRef.current) observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const el = videoRef.current;
-    if (!el || isActive) return;
-    el.pause(); el.muted = true;
-    setIsPlaying(false); setIsMuted(true);
-  }, [isActive]);
+    if (!el) return;
+    if (isActive) {
+      el.muted = true;
+      setIsMuted(true);
+      el.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
+    } else {
+      el.pause();
+      el.currentTime = 0;
+      el.muted = true;
+      setIsPlaying(false);
+      setIsMuted(true);
+    }
+  }, [isActive, loaded]);
 
   const handleLoaded = useCallback(() => {
     setLoaded(true);
-    const el = videoRef.current;
-    if (!el) return;
-    el.muted = true;
-    el.play().catch(() => {});
-    setIsPlaying(true);
   }, []);
 
   const handleClick = useCallback(() => {
@@ -170,6 +191,7 @@ export function VideoCard({ video, isActive, onActivate }: VideoCardProps) {
   return (
     /* Outer wrapper: bone + string on top + the card below */
     <div 
+      ref={containerRef}
       className="flex flex-col items-center"
       style={{
         transition: 'all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1)',
@@ -218,18 +240,20 @@ export function VideoCard({ video, isActive, onActivate }: VideoCardProps) {
             background: '#1a0a14',
           }}
         >
-          <video
-            ref={videoRef}
-            src={video.src}
-            preload="metadata"
+          {inView && (
+            <video
+              ref={videoRef}
+              src={video.src}
+              preload="metadata"
             playsInline
             loop
             muted
             onLoadedMetadata={handleLoaded}
             onPlay={() => setIsPlaying(true)}
             onPause={() => setIsPlaying(false)}
-            className="absolute inset-0 w-full h-full object-cover"
-          />
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          )}
 
           {/* Loading spinner */}
           {!loaded && (

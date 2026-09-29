@@ -115,7 +115,7 @@ export const Footer = ({
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hover:border-teal-400 duration-300 drop-shadow-[0_0px_30px_rgba(23,107,104,0.4)] backdrop-blur-md rounded-[2rem] bg-charcoal border border-white/20 flex items-center justify-center p-4 z-10 transition-transform hover:scale-105">
               <div className="w-16 sm:w-20 md:w-28 h-16 sm:h-20 md:h-28 flex items-center justify-center">
                 {brandIcon || (
-                  <img src="/logo.png" alt="Happy Pet Logo" className="w-12 sm:w-16 md:w-24 h-12 sm:h-16 md:h-24 object-contain drop-shadow-md" />
+                  <img loading="lazy"  src="/logo.png" alt="Happy Pet Logo" className="w-12 sm:w-16 md:w-24 h-12 sm:h-16 md:h-24 object-contain drop-shadow-md" />
                 )}
               </div>
             </div>

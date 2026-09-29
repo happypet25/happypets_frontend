@@ -117,7 +117,7 @@ export default function BlogPage() {
             style={{ border: '1.5px solid #F3D5E8', boxShadow: '0 8px 40px rgba(198,46,123,0.08)', background: '#fff' }}
           >
             <div className="lg:w-[55%] aspect-[16/9] lg:aspect-auto overflow-hidden relative min-h-[280px]">
-              <img
+              <img loading="lazy" 
                 src={featured.img}
                 alt={featured.title}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"

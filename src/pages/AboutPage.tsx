@@ -55,7 +55,7 @@ export default function AboutPage() {
             </div>
             <div className="relative reveal-right">
               <div className="absolute -top-4 -right-4 w-full h-full rounded-3xl pointer-events-none" style={{ background: 'linear-gradient(135deg, #FDEEF6, #FFF8EB)', opacity: 0.6, borderRadius: '1.5rem' }} />
-              <img
+              <img loading="lazy" 
                 src="https://images.unsplash.com/photo-1593134257782-e89567b7718a?w=800&q=85&auto=format&fit=crop"
                 alt="Happy dog with trainer"
                 className="relative z-10 w-full object-cover shadow-2xl"

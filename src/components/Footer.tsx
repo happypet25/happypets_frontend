@@ -53,7 +53,7 @@ export default function Footer() {
             <div className="sm:col-span-2 lg:col-span-1">
               <Link to="/" className="flex items-center gap-3 mb-6 group">
                 <div className="w-32 h-32 bg-white rounded-full p-3 flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover:scale-105 shadow-md">
-                  <img src="/logo.png" alt="Happy Pet Training" className="w-full h-full object-contain" />
+                  <img loading="lazy"  src="/logo.png" alt="Happy Pet Training" className="w-full h-full object-contain" />
                 </div>
                 <div>
                   <div className="font-heading font-black text-base tracking-tight text-white">HAPPY PET</div>

@@ -50,7 +50,7 @@ function FounderLetterModal({ onClose }: { onClose: () => void }) {
               className="w-14 h-14 rounded-2xl overflow-hidden flex-shrink-0"
               style={{ background: 'rgba(255,255,255,0.15)', border: '2px solid rgba(255,255,255,0.3)' }}
             >
-              <img
+              <img loading="lazy" 
                 src="/logo.png"
                 alt="Founder"
                 className="w-full h-full object-contain p-1"
@@ -228,7 +228,7 @@ export default function Navbar() {
         </div>
         <div className="container-site flex items-center justify-between gap-3 flex-wrap relative z-10">
           <span className="font-body text-white text-[11px] font-medium flex items-center gap-2">
-            <img src="/logo.png" alt="Logo" width="18" height="18" className="w-[18px] h-[18px] object-contain hidden sm:block" />
+            <img loading="lazy"  src="/logo.png" alt="Logo" width="18" height="18" className="w-[18px] h-[18px] object-contain hidden sm:block" />
             🐾 Mumbai's #1 Dog Trainers — Positive Reinforcement, Real Results
           </span>
           <div className="flex items-center gap-3">
@@ -272,7 +272,7 @@ export default function Navbar() {
         <div className="container-site flex items-center justify-between py-2">
           <Link to="/" className="flex items-center gap-3 flex-shrink-0 group" aria-label="Happy Pet Training Home">
             <div className="transition-transform duration-300 group-hover:scale-105">
-              <img src="/logo.png" alt="Happy Pet Training Logo" width="64" height="64" className="w-[64px] h-[64px] object-contain" />
+              <img loading="lazy"  src="/logo.png" alt="Happy Pet Training Logo" width="64" height="64" className="w-[64px] h-[64px] object-contain" />
             </div>
             <div className="flex flex-col leading-none">
               <span className="font-heading font-black text-[17px] tracking-tight" style={{ color: '#C62E7B' }}>HAPPY PET</span>

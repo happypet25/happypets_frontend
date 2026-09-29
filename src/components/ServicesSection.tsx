@@ -574,20 +574,11 @@ function HomeServiceCard({ service }: { service: ServiceItem }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* Top right details button */}
-      <div className="absolute top-3 right-3 z-20">
-        <Link
-          to={`/services/${service.id}`}
-          className="flex items-center gap-1 font-heading font-bold text-[10px] px-3 py-1.5 rounded-full transition-all hover:opacity-90 shadow-sm"
-          style={{ background: '#FCC244', color: '#2A1A24' }}
-        >
-          View Details <ArrowRight size={10} />
-        </Link>
-      </div>
-      {/* Top: icon + title */}
-      <div className="p-4 flex items-center gap-2.5 flex-shrink-0">
+      {/* Top: icon + title + details button — all in one row that wraps gracefully */}
+      <div className="p-4 pb-2 flex items-start gap-2.5 flex-shrink-0">
+        {/* Icon */}
         <div
-          className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
+          className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5"
           style={{
             background: service.iconBg,
             transition: 'transform 0.3s',
@@ -596,34 +587,49 @@ function HomeServiceCard({ service }: { service: ServiceItem }) {
         >
           <div style={{ transform: 'scale(1.2)' }}>{service.icon}</div>
         </div>
-        <div className="min-w-0">
-          <h3 className="font-heading font-black text-[15px] leading-tight" style={{ color: '#2A1A24' }}>
+
+        {/* Title + rating + price — takes remaining width */}
+        <div className="flex-1 min-w-0 pr-1">
+          {/* Service name row: text wraps naturally, no overlap */}
+          <h3
+            className="font-heading font-black text-[14px] leading-tight break-words"
+            style={{ color: '#2A1A24' }}
+          >
             {service.category}
           </h3>
-          <div className="flex items-center gap-0.5 mt-0.5 mb-1.5">
+          <div className="flex items-center gap-0.5 mt-0.5 mb-1">
             {[...Array(5)].map((_, i) => <Star key={i} size={8} fill="#FCC244" color="#FCC244" />)}
             <span className="font-body text-[9px] ml-1" style={{ color: '#9CA3AF' }}>Expert</span>
           </div>
           {service.id === 'pet-training' ? (
-            <div className="font-body text-[12px] font-bold mt-2" style={{ color: service.accentColor }}>
+            <div className="font-body text-[11px] font-bold" style={{ color: service.accentColor }}>
               Contact Us for Pricing
             </div>
           ) : (
-            <div className="flex items-baseline gap-1 mt-1">
-              <span className="font-body text-[10px] text-gray-500 uppercase tracking-wider">Starts at</span>
-              <span className="font-heading font-black text-lg" style={{ color: service.accentColor }}>
+            <div className="flex items-baseline gap-1">
+              <span className="font-body text-[9px] text-gray-500 uppercase tracking-wider">Starts at</span>
+              <span className="font-heading font-black text-base" style={{ color: service.accentColor }}>
                 {service.startPrice}
               </span>
-              <span className="font-body text-[10px] text-gray-500">
-                {service.startUnit}
-              </span>
+              <span className="font-body text-[9px] text-gray-500">{service.startUnit}</span>
             </div>
           )}
+        </div>
+
+        {/* View Details button — top-right, always visible */}
+        <div className="flex-shrink-0">
+          <Link
+            to={`/services/${service.id}`}
+            className="flex items-center gap-1 font-heading font-bold text-[10px] px-2.5 py-1.5 rounded-full transition-all hover:opacity-90 shadow-sm whitespace-nowrap"
+            style={{ background: '#FCC244', color: '#2A1A24' }}
+          >
+            Details <ArrowRight size={9} />
+          </Link>
         </div>
       </div>
 
       {/* Middle: image OR feature panel */}
-      <div className="relative flex-1" style={{ minHeight: '150px' }}>
+      <div className="relative flex-1" style={{ minHeight: '145px' }}>
         {/* Dog image */}
         <div
           className="absolute inset-0 flex items-end justify-center overflow-hidden"
@@ -637,7 +643,7 @@ function HomeServiceCard({ service }: { service: ServiceItem }) {
             src={service.image}
             alt={service.category}
             className="w-[82%] object-contain object-bottom"
-            style={{ maxHeight: '140px', mixBlendMode: 'multiply' }}
+            style={{ maxHeight: '135px', mixBlendMode: 'multiply' }}
             loading="lazy"
           />
         </div>
@@ -665,30 +671,47 @@ function HomeServiceCard({ service }: { service: ServiceItem }) {
         </div>
       </div>
 
-      {/* Bottom action bar */}
-      <div className="flex items-center justify-between px-4 py-3 flex-shrink-0 gap-2" style={{ borderTop: '1px solid #F3D5E8' }}>
+      {/* Bottom action bar — Call + WhatsApp + Book Now */}
+      <div
+        className="flex items-center px-3 py-2.5 flex-shrink-0 gap-1.5"
+        style={{ borderTop: '1px solid #F3D5E8' }}
+      >
+        {/* Call */}
         <a
           href="tel:+91-88799-52169"
-          className="flex items-center gap-1 font-heading font-bold text-[11px] px-3 py-2 rounded-full transition-all hover:opacity-90"
+          className="flex items-center gap-1 font-heading font-bold text-[10px] px-2.5 py-1.5 rounded-full transition-all hover:opacity-90 flex-shrink-0"
           style={{ background: '#FDEEF6', color: service.accentColor, border: `1px solid ${service.accentColor}30` }}
           onClick={e => e.stopPropagation()}
         >
-          <Phone size={10} /> Call
+          <Phone size={9} /> Call
         </a>
+
+        {/* WhatsApp */}
         <a
           href={service.whatsapp}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-1 font-heading font-bold text-[11px] px-3 py-2 rounded-full transition-all hover:opacity-90"
+          className="flex items-center gap-1 font-heading font-bold text-[10px] px-2.5 py-1.5 rounded-full transition-all hover:opacity-90 flex-shrink-0"
           style={{ background: '#22c55e', color: '#fff' }}
           onClick={e => e.stopPropagation()}
         >
-          <MessageCircle size={10} /> WhatsApp
+          <MessageCircle size={9} /> WhatsApp
         </a>
+
+        {/* Book Now */}
+        <Link
+          to={`/services/${service.id}`}
+          className="flex items-center gap-1 font-heading font-bold text-[10px] px-2.5 py-1.5 rounded-full transition-all hover:opacity-90 flex-1 justify-center whitespace-nowrap"
+          style={{ background: '#FCC244', color: '#2A1A24' }}
+          onClick={e => e.stopPropagation()}
+        >
+          Book Now
+        </Link>
       </div>
     </div>
   );
 }
+
 
 /* ─── Main Section (Home page) ────────────────────────────────── */
 export default function ServicesSection() {

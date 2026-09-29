@@ -83,7 +83,7 @@ export default function CTABanner() {
             </div>
 
             <div className="w-full lg:w-[40%] relative reveal-right flex justify-end">
-              <img
+              <img loading="lazy" 
                 src="cta.png"
                 alt="Dog getting a treat"
                 className="w-full h-[280px] lg:h-[360px] object-cover object-center rounded-[32px] lg:rounded-l-none lg:rounded-r-[32px] shadow-2xl"

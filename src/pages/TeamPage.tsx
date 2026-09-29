@@ -159,7 +159,7 @@ export function TrainerCard({ trainer, onClick }: { trainer: Trainer; onClick: (
               className="relative group-hover:scale-105 rounded-full overflow-hidden shadow-xl"
               style={{ width: 165, height: 165, border: '4px solid #fff', transition: 'transform 0.5s cubic-bezier(0.4,0,0.2,1)' }}
             >
-              <img
+              <img loading="lazy" 
                 src={trainer.img}
                 alt={trainer.name}
                 className="w-full h-full object-cover object-top"
@@ -239,7 +239,7 @@ function TrainerModal({ trainer, onClose }: { trainer: Trainer; onClose: () => v
             {/* Photo */}
             <div className="w-32 h-32 rounded-full overflow-hidden flex-shrink-0 shadow-xl border-4 border-white"
               style={{ background: `${trainer.accentColor}22` }}>
-              <img src={trainer.img} alt={trainer.name} className="w-full h-full object-cover object-top" />
+              <img loading="lazy"  src={trainer.img} alt={trainer.name} className="w-full h-full object-cover object-top" />
             </div>
 
             {/* Name */}

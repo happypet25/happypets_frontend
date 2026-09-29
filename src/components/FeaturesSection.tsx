@@ -22,7 +22,7 @@ export default function FeaturesSection() {
               style={{ inset: '-16px', background: 'linear-gradient(135deg, #FDEEF6 0%, #FFF8EB 100%)', opacity: 0.5, borderRadius: '1.5rem', zIndex: 0 }}
             />
             <div className="relative z-10 overflow-hidden rounded-3xl shadow-2xl w-full sm:w-[90%] lg:w-[85%] mx-auto" style={{ border: '3px solid rgba(198,46,123,0.15)' }}>
-              <img
+              <img loading="lazy" 
                 src="/trainer-with-dog.webp"
                 alt="Trainer with Dog"
                 className="w-full h-[450px] lg:h-[820px] object-cover object-top"
