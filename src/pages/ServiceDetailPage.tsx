@@ -180,26 +180,38 @@ function PricingCard({ pkg, accent, featured = false }: { pkg: PricingPackage; a
         </div>
 
         {/* CTA */}
-        <div className="flex gap-2">
-          <a
-            href="tel:+91-88799-52169"
+        <div className="flex flex-col gap-2">
+          <Link
+            to="/contact"
             className="flex-1 flex items-center justify-center gap-1.5 font-heading font-bold text-sm py-3 rounded-xl transition-all hover:opacity-90"
             style={{
               background: '#FCC244',
               color: '#2A1A24',
             }}
           >
-            <Phone size={13} /> Book Now
-          </a>
-          <a
-            href="https://wa.me/918879952169"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-1.5 font-heading font-bold text-sm px-4 py-3 rounded-xl transition-all hover:opacity-90"
-            style={{ background: '#22c55e', color: '#fff' }}
-          >
-            <MessageCircle size={13} />
-          </a>
+            Book Now
+          </Link>
+          <div className="flex gap-2">
+            <a
+              href="tel:+91-88799-52169"
+              className="flex-1 flex items-center justify-center gap-1.5 font-heading font-bold text-sm py-3 rounded-xl transition-all hover:opacity-90"
+              style={{
+                background: featured ? '#fff' : accent,
+                color: featured ? accent : '#fff',
+              }}
+            >
+              <Phone size={13} /> Call
+            </a>
+            <a
+              href="https://wa.me/918879952169"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 flex items-center justify-center gap-1.5 font-heading font-bold text-sm py-3 rounded-xl transition-all hover:opacity-90"
+              style={{ background: '#22c55e', color: '#fff' }}
+            >
+              <MessageCircle size={13} /> WhatsApp
+            </a>
+          </div>
         </div>
       </div>
     </div>

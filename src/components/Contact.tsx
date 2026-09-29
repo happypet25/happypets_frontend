@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { MapPin, Phone, Mail } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
 import useScrollReveal from '../hooks/useScrollReveal';
@@ -14,6 +14,41 @@ export default function Contact() {
   useScrollReveal();
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const [cityQuery, setCityQuery] = useState('');
+  const [cityOptions, setCityOptions] = useState<any[]>([]);
+  const [isSearching, setIsSearching] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
+        setShowDropdown(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(async () => {
+      if (cityQuery.trim().length > 2) {
+        setIsSearching(true);
+        try {
+          const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(cityQuery)}&format=json&addressdetails=1&limit=5&countrycodes=in`);
+          const data = await res.json();
+          setCityOptions(data || []);
+        } catch (err) {
+          console.error("City fetch error:", err);
+        } finally {
+          setIsSearching(false);
+        }
+      } else {
+        setCityOptions([]);
+      }
+    }, 500);
+    return () => clearTimeout(timeoutId);
+  }, [cityQuery]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -132,7 +167,7 @@ export default function Contact() {
           {/* Right - Form */}
           <div className="md:w-1/2 p-6 sm:p-10 lg:p-12 relative bg-white">
             
-            <h2 className="font-heading font-bold text-2xl sm:text-3xl text-green-800 mb-2">
+            <h2 className="font-heading font-bold text-2xl sm:text-3xl text-[#FCC244] mb-2">
               Book Your Free Demo
             </h2>
             <p className="font-body text-gray-500 mb-6 sm:mb-8 text-sm sm:text-base">
@@ -175,24 +210,45 @@ export default function Contact() {
               </div>
 
               <div>
-                <label className="block text-xs text-gray-400 mb-1.5 ml-1">Your City</label>
-                <div className="relative">
-                  <select 
+                <label className="block text-xs text-gray-400 mb-1.5 ml-1">Your City / Area</label>
+                <div className="relative" ref={wrapperRef}>
+                  <input
+                    type="text"
                     name="city"
                     required
-                    defaultValue=""
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-brand-magenta focus:ring-1 focus:ring-brand-magenta appearance-none bg-white transition-colors text-gray-700"
-                  >
-                    <option value="" disabled>Select your city</option>
-                    <option value="Mumbai">Mumbai</option>
-                    <option value="Thane">Thane</option>
-                    <option value="Navi Mumbai">Navi Mumbai</option>
-                    <option value="Pune">Pune</option>
-                    <option value="Other">Other</option>
-                  </select>
-                  <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-gray-400">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                  </div>
+                    value={cityQuery}
+                    onChange={(e) => {
+                      setCityQuery(e.target.value);
+                      setShowDropdown(true);
+                    }}
+                    onFocus={() => setShowDropdown(true)}
+                    placeholder="Search your area (e.g., Bandra, Mumbai)"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-brand-magenta focus:ring-1 focus:ring-brand-magenta bg-white transition-colors text-gray-700"
+                    autoComplete="off"
+                  />
+                  {showDropdown && (cityQuery.length > 2) && (
+                    <div className="absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-xl shadow-lg max-h-60 overflow-y-auto">
+                      {isSearching ? (
+                        <div className="p-3 text-sm text-gray-500">Searching...</div>
+                      ) : cityOptions.length > 0 ? (
+                        cityOptions.map((opt, idx) => (
+                          <div 
+                            key={idx}
+                            className="p-3 hover:bg-pink-50 cursor-pointer text-sm text-gray-700"
+                            onClick={() => {
+                              const parts = opt.display_name.split(', ');
+                              setCityQuery(parts.slice(0, 2).join(', '));
+                              setShowDropdown(false);
+                            }}
+                          >
+                            {opt.display_name}
+                          </div>
+                        ))
+                      ) : (
+                        <div className="p-3 text-sm text-gray-500">No locations found</div>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
 

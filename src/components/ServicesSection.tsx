@@ -700,7 +700,7 @@ function HomeServiceCard({ service }: { service: ServiceItem }) {
 
         {/* Book Now */}
         <Link
-          to={`/services/${service.id}`}
+          to="/contact"
           className="flex items-center gap-1 font-heading font-bold text-[10px] px-2.5 py-1.5 rounded-full transition-all hover:opacity-90 flex-1 justify-center whitespace-nowrap"
           style={{ background: '#FCC244', color: '#2A1A24' }}
           onClick={e => e.stopPropagation()}
