@@ -15,33 +15,6 @@ export interface VideoData {
 
 const VIDEOS: VideoData[] = [
   {
-    id: 'review-2',
-    src: 'https://res.cloudinary.com/xo2vcg7c/video/upload/v1790655807/review_video_2_-1.mp4',
-    label: 'Verified Review',
-    sub: 'Thane',
-    stars: 5,
-    cardBg: 'linear-gradient(145deg, #7B3F00 0%, #D97706 70%)',
-    pinColor: '#C62E7B',
-  },
-  {
-    id: 'review-3',
-    src: 'https://res.cloudinary.com/xo2vcg7c/video/upload/v1790656107/review-video-.mp4',
-    label: 'Real Customer',
-    sub: 'Navi Mumbai',
-    stars: 5,
-    cardBg: 'linear-gradient(145deg, #C62E7B 0%, #C62E7B 70%)',
-    pinColor: '#FCC244',
-  },
-  {
-    id: 'review-4',
-    src: 'https://res.cloudinary.com/xo2vcg7c/video/upload/v1790655791/1009_1.mp4',
-    label: 'Verified Review',
-    sub: 'Mumbai',
-    stars: 5,
-    cardBg: 'linear-gradient(145deg, #7B3F00 0%, #D97706 70%)',
-    pinColor: '#C62E7B',
-  },
-  {
     id: 'review-5',
     src: 'https://res.cloudinary.com/xo2vcg7c/video/upload/v1790655800/change_done_review_video_2.mp4',
     label: 'Real Customer',
@@ -60,6 +33,15 @@ const VIDEOS: VideoData[] = [
     pinColor: '#C62E7B',
   },
   {
+    id: 'review-4',
+    src: 'https://res.cloudinary.com/xo2vcg7c/video/upload/v1790655791/1009_1.mp4',
+    label: 'Verified Review',
+    sub: 'Mumbai',
+    stars: 5,
+    cardBg: 'linear-gradient(145deg, #7B3F00 0%, #D97706 70%)',
+    pinColor: '#C62E7B',
+  },
+  {
     id: 'review-7',
     src: 'https://res.cloudinary.com/xo2vcg7c/video/upload/v1790655799/review_video_4_2.mp4',
     label: 'Real Customer',
@@ -67,6 +49,24 @@ const VIDEOS: VideoData[] = [
     stars: 5,
     cardBg: 'linear-gradient(145deg, #C62E7B 0%, #C62E7B 70%)',
     pinColor: '#FCC244',
+  },
+  {
+    id: 'review-3',
+    src: 'https://res.cloudinary.com/xo2vcg7c/video/upload/v1790656107/review-video-.mp4',
+    label: 'Real Customer',
+    sub: 'Navi Mumbai',
+    stars: 5,
+    cardBg: 'linear-gradient(145deg, #C62E7B 0%, #C62E7B 70%)',
+    pinColor: '#FCC244',
+  },
+  {
+    id: 'review-2',
+    src: 'https://res.cloudinary.com/xo2vcg7c/video/upload/v1790655807/review_video_2_-1.mp4',
+    label: 'Verified Review',
+    sub: 'Thane',
+    stars: 5,
+    cardBg: 'linear-gradient(145deg, #7B3F00 0%, #D97706 70%)',
+    pinColor: '#C62E7B',
   },
 ];
 
