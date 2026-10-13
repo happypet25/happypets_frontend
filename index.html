@@ -15,6 +15,15 @@
       fbq('track', 'PageView');
     </script>
     <!-- End Meta Pixel Code -->
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=%VITE_GA_ID%"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '%VITE_GA_ID%');
+    </script>
+    <!-- End Google tag -->
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/logo.png?v=2" />
   <meta name="theme-color" content="#F4A7C1" />
