@@ -1,10 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-       <loc>https://happypettraining.com/</loc>
-       <lastmod>2026-10-07T20:23:59+00:00</lastmod>
-       <priority>1.0000</priority>
+    <loc>https://happypettraining.com/</loc>
+    <lastmod>2026-10-13</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://happypettraining.com/about</loc>
+    <lastmod>2026-10-13</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://happypettraining.com/team</loc>
+    <lastmod>2026-10-13</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://happypettraining.com/services</loc>
+    <lastmod>2026-10-13</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://happypettraining.com/contact</loc>
+    <lastmod>2026-10-13</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://happypettraining.com/gallery</loc>
+    <lastmod>2026-10-13</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://happypettraining.com/blog</loc>
+    <lastmod>2026-10-13</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://happypettraining.com/services/pet-training</loc>
+    <lastmod>2026-10-13</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://happypettraining.com/services/pet-walking</loc>
+    <lastmod>2026-10-13</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://happypettraining.com/services/pet-grooming</loc>
+    <lastmod>2026-10-13</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://happypettraining.com/services/daycare-boarding</loc>
+    <lastmod>2026-10-13</lastmod>
+    <priority>0.8</priority>
   </url>
 </urlset>
