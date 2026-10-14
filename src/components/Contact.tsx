@@ -62,37 +62,66 @@ export default function Contact() {
       let apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
       // Defensively remove trailing slash to prevent double slash (//) redirect errors on Vercel
       apiUrl = apiUrl.replace(/\/+$/, "");
-      
+
       const response = await fetch(`${apiUrl}/api/contact`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
       });
 
       const data = await response.json();
 
       if (data.success) {
-        toast.success("Thank you! We'll reach you soon.", {
-          style: {
-            border: '1px solid #C62E7B',
-            padding: '16px',
-            color: '#8B1055',
-            fontWeight: '600',
-          },
-          iconTheme: {
-            primary: '#C62E7B',
-            secondary: '#FFFAEE',
-          },
-        });
-        form.reset(); // Clear the form completely
+        // ── Full success ────────────────────────────────────────────────────
+        if (data.emailSent && data.sheetSaved) {
+          toast.success("Booking confirmed! We'll reach you soon. 🎉", {
+            style: { border: '1px solid #C62E7B', padding: '16px', color: '#8B1055', fontWeight: '600' },
+            iconTheme: { primary: '#C62E7B', secondary: '#FFFAEE' },
+            duration: 4000,
+          });
+        }
+
+        // ── Email sent but sheet failed ─────────────────────────────────────
+        if (data.emailSent && !data.sheetSaved) {
+          toast.success("Booking received! We'll reach you soon. 🎉", {
+            style: { border: '1px solid #C62E7B', padding: '16px', color: '#8B1055', fontWeight: '600' },
+            iconTheme: { primary: '#C62E7B', secondary: '#FFFAEE' },
+            duration: 4000,
+          });
+          toast.error("⚠️ Sheet entry failed — please note this in admin.", {
+            style: { border: '1px solid #D97706', padding: '14px', color: '#92400E', fontWeight: '500', fontSize: '13px' },
+            iconTheme: { primary: '#D97706', secondary: '#FFFBEB' },
+            duration: 6000,
+          });
+        }
+
+        // ── Sheet saved but email failed ────────────────────────────────────
+        if (!data.emailSent && data.sheetSaved) {
+          toast.success("Details saved! However, email notification failed.", {
+            style: { border: '1px solid #D97706', padding: '16px', color: '#92400E', fontWeight: '600' },
+            iconTheme: { primary: '#D97706', secondary: '#FFFBEB' },
+            duration: 5000,
+          });
+        }
+
+        form.reset();
       } else {
-        toast.error(data.message || "Oops! Something went wrong.");
+        // ── Both failed ─────────────────────────────────────────────────────
+        toast.error(data.message || "Both email & sheet failed. Please try again.", {
+          style: { border: '1px solid #DC2626', padding: '16px', color: '#7F1D1D', fontWeight: '600' },
+          iconTheme: { primary: '#DC2626', secondary: '#FEF2F2' },
+          duration: 6000,
+        });
       }
     } catch (error) {
       console.error("Fetch error details:", error);
-      toast.error("Network error. Please try again later.");
+      toast.error("Network error — please check your connection and try again.", {
+        style: { border: '1px solid #DC2626', padding: '16px', color: '#7F1D1D', fontWeight: '600' },
+        iconTheme: { primary: '#DC2626', secondary: '#FEF2F2' },
+        duration: 5000,
+      });
     } finally {
       setIsSubmitting(false);
     }
